@@ -98,7 +98,8 @@ push to main
 
 | Secret | Purpose |
 |---|---|
-| `TAILSCALE_AUTH_KEY` | Ephemeral auth key to join the Tailscale tailnet |
+| `TS_OAUTH_CLIENT_ID` | Tailscale OAuth client ID (Settings → OAuth clients, tag:ci) |
+| `TS_OAUTH_SECRET` | Tailscale OAuth client secret |
 | `MINICLOUD_CA_CERT` | Self-signed CA PEM — lets Docker and cosign trust Harbor TLS |
 | `HARBOR_USER` | Harbor registry username |
 | `HARBOR_PASSWORD` | Harbor registry password |
@@ -127,8 +128,8 @@ docker run --rm ghcr.io/open-webui/open-webui:<new-tag> \
 
 | Phase | Description | Status |
 |---|---|---|
-| A | Custom image deployed; init containers still present (idempotent safety net) | ✅ Done on first CI push |
-| B | Remove init containers + ConfigMap; set `SSL_CERT_FILE=/ca-bundle.crt` | Pending — do after verifying Phase A |
+| A | Custom image deployed; init containers still present (idempotent safety net) | ✅ Done |
+| B | Remove init containers + ConfigMap; set `SSL_CERT_FILE=/ca-bundle.crt` | ✅ Done |
 
 See `CONTRIBUTING.md` for Phase B instructions.
 
