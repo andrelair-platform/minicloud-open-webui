@@ -10,6 +10,7 @@ metadata:
   annotations:
     backstage.io/source-location: url:https://github.com/andrelair-platform/minicloud-open-webui
     github.com/project-slug: andrelair-platform/minicloud-open-webui
+    argocd/app-name: open-webui
     backstage.io/kubernetes-id: open-webui
   tags:
     - docker
