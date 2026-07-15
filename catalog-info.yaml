@@ -1,0 +1,28 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: minicloud-open-webui
+  description: |
+    Level 2 custom Open WebUI image — extends the upstream open-webui image with the
+    minicloud CA certificate and a French-language BM25 preprocessor (NLTK tokeniser)
+    baked in, enabling hybrid RAG search with French document corpora in the AI platform.
+  annotations:
+    backstage.io/source-location: url:https://github.com/andrelair-platform/minicloud-open-webui
+    github.com/project-slug: andrelair-platform/minicloud-open-webui
+    backstage.io/kubernetes-id: open-webui
+  tags:
+    - docker
+    - open-webui
+    - ai
+    - rag
+    - level2
+  links:
+    - url: https://chat.devandre.sbs
+      title: Open WebUI (AI chat)
+      icon: web
+spec:
+  type: service
+  lifecycle: production
+  owner: group:default/andrelair-platform
+  system: minicloud-platform
