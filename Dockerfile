@@ -2,6 +2,8 @@ FROM ghcr.io/open-webui/open-webui:0.9.4@sha256:172e1fe0e89af2a07f42f2b1d943f30c
 
 USER root
 
+RUN apt-get update && apt-get upgrade -y --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
 # CA cert injected at build time via --build-arg (CI passes MINICLOUD_CA_CERT secret).
 # Never committed to the repo — internal infrastructure detail.
 # Baked into a bundle alongside all system CAs (SSL_CERT_FILE points to /ca-bundle.crt).
