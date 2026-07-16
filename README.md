@@ -18,7 +18,6 @@
 - [Architecture](#architecture)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
 - [CI/CD Pipeline](#cicd-pipeline)
 - [Bumping the base image](#bumping-the-base-image)
 - [Troubleshooting](#troubleshooting)
@@ -155,24 +154,6 @@ docker run --rm open-webui-custom:local \
 # CA bundle was created
 docker run --rm open-webui-custom:local \
   test -f /ca-bundle.crt && echo "CA bundle OK"
-```
-
----
-
-## Project Structure
-
-```
-minicloud-open-webui/
-├── Dockerfile                          # 4-layer build: upgrade → CA bake → BM25 patch
-├── patches/
-│   └── patch_bm25_french_build.py     # Idempotent patcher: French Snowball BM25Retriever
-├── catalog-info.yaml                   # Backstage catalog entity (Component, ai namespace)
-├── CONTRIBUTING.md                     # Branch strategy, commit style, bump procedure
-├── LICENSE
-└── .github/
-    └── workflows/
-        ├── ci.yml                      # Build → push → Trivy → cosign → SBOM → gitops bump
-        └── release.yml                 # Semver tagging workflow
 ```
 
 ---
