@@ -170,6 +170,7 @@ jobs:
       - name: Bump image tag in open-webui-values.yaml
         env:
           NEW_TAG: ${{ needs.build-and-push.outputs.image_tag }}
+          GH_TOKEN: ${{ secrets.GITOPS_TOKEN }}
         run: |
           sed -i "s|^  repository: .*|  repository: harbor.10.0.0.200.nip.io/library/open-webui|" helm-values/open-webui-values.yaml
           sed -i "s|^  tag: .*|  tag: \"${NEW_TAG}\"|" helm-values/open-webui-values.yaml
@@ -179,5 +180,19 @@ jobs:
             echo "No change — already at ${NEW_TAG}"
             exit 0
           fi
+          BRANCH="ci/open-webui-bump-${NEW_TAG}"
+          git checkout -b "${BRANCH}"
           git commit -S -m "ci(open-webui): bump image to ${NEW_TAG}"
-          git push
+          git push origin "${BRANCH}"
+          gh pr create \
+            --repo "${{ env.GITOPS_REPO }}" \
+            --title "ci(open-webui): bump image to ${NEW_TAG}" \
+            --body "Automated image bump from CI." \
+            --head "${BRANCH}" \
+            --base main
+          gh pr merge \
+            --repo "${{ env.GITOPS_REPO }}" \
+            --admin \
+            --merge \
+            --delete-branch \
+            "ci/open-webui-bump-${NEW_TAG}"
