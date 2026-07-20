@@ -21,3 +21,12 @@ RUN python3 /tmp/patch_bm25_french_build.py \
     && grep -q '_french_bm25_preprocess' /app/backend/open_webui/retrieval/utils.py \
     && echo "BM25 French patch verified" \
     && rm /tmp/patch_bm25_french_build.py
+
+# Add prometheus-fastapi-instrumentator so Prometheus can scrape /metrics from Open WebUI.
+# sitecustomize.py is auto-loaded by Python before any user code — it patches
+# FastAPI.__init__ so every FastAPI app (including Open WebUI) gets instrumented
+# with http_request_duration_seconds histogram and http_requests_total counter.
+COPY patches/sitecustomize.py /tmp/sitecustomize.py
+RUN pip install "prometheus-fastapi-instrumentator>=7.1.0" --quiet \
+    && python3 -c "import site, shutil; shutil.copy('/tmp/sitecustomize.py', site.getsitepackages()[0]+'/sitecustomize.py')" \
+    && rm /tmp/sitecustomize.py
