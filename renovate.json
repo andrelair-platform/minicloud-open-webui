@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+
+  "timezone": "Europe/Paris",
+  "schedule": ["every weekend"],
+  "labels": ["dependencies", "renovate"],
+  "assignees": ["AndreLiar"],
+  "prConcurrentLimit": 2,
+  "commitMessagePrefix": "chore(deps):",
+
+  "enabledManagers": ["dockerfile"],
+
+  "packageRules": [
+    {
+      "description": "Open WebUI base image — minor/patch: build and redeploy",
+      "matchManagers": ["dockerfile"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "base images",
+      "labels": ["dependencies", "renovate", "check-default-changes"],
+      "automerge": false
+    },
+    {
+      "description": "Open WebUI major version — new defaults and env vars often change",
+      "matchManagers": ["dockerfile"],
+      "matchUpdateTypes": ["major"],
+      "labels": ["dependencies", "renovate", "major", "manual-review-required"],
+      "dependencyDashboardApproval": true
+    }
+  ]
+}
