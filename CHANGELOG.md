@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/andrelair-platform/minicloud-open-webui/compare/minicloud-open-webui-v0.1.1...minicloud-open-webui-v0.1.2) (2026-08-14)
+
+
+### Bug Fixes
+
+* **website:** correct sidebars.ts brace syntax ([cb32fcb](https://github.com/andrelair-platform/minicloud-open-webui/commit/cb32fcb82739aadc62b69106e56d61e93d9164c1))
+
 ## [0.1.1](https://github.com/andrelair-platform/minicloud-open-webui/compare/minicloud-open-webui-v0.1.0...minicloud-open-webui-v0.1.1) (2026-08-14)
 
 
